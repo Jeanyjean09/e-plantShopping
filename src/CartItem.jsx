@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { updateQuantity, removeItem } from './CartSlice'; // Adjust path as needed
+import { updateQuantity, removeItem } from './CartSlice'; // Adjust path if necessary
 
 const CartItem = ({ cart, onContinueShopping }) => {
   const dispatch = useDispatch();
@@ -9,19 +9,19 @@ const CartItem = ({ cart, onContinueShopping }) => {
   const calculateTotalAmount = () => {
     let total = 0;
     cart.forEach(item => {
-      const costNumber = parseFloat(item.cost.substring(1)); // e.g. "$10.00" -> 10.00
+      const costNumber = parseFloat(item.cost.substring(1)); // "$10.00" => 10.00
       total += costNumber * item.quantity;
     });
-    return total.toFixed(2); // return as string with 2 decimals
+    return total.toFixed(2); // two decimals as string
   };
 
-  // Calculate subtotal cost for a single cart item
+  // Calculate subtotal for a single item
   const calculateTotalCost = (item) => {
     const costNumber = parseFloat(item.cost.substring(1));
     return (costNumber * item.quantity).toFixed(2);
   };
 
-  // Continue shopping handler calls the parent callback
+  // Continue shopping: calls parent callback
   const handleContinueShopping = (e) => {
     e.preventDefault();
     onContinueShopping(e);
@@ -32,7 +32,7 @@ const CartItem = ({ cart, onContinueShopping }) => {
     dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
   };
 
-  // Decrement quantity of a specific item or remove if quantity is 1
+  // Decrement quantity or remove item if quantity drops to 0
   const handleDecrement = (item) => {
     if (item.quantity > 1) {
       dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
@@ -41,12 +41,12 @@ const CartItem = ({ cart, onContinueShopping }) => {
     }
   };
 
-  // Remove item from cart directly
+  // Remove item completely from cart
   const handleRemove = (item) => {
     dispatch(removeItem({ name: item.name }));
   };
 
-  // Checkout alert placeholder
+  // Placeholder for checkout alert
   const handleCheckoutShopping = (e) => {
     alert('Functionality to be added for future reference');
   };
