@@ -1,11 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter basename="/e-plantShopping">
-    <App />
-  </BrowserRouter>
-);
+function Home() {
+  const navigate = useNavigate();
 
+  return (
+    <div>
+      <h1>Welcome to Paradise Nursery</h1>
+      <button onClick={() => navigate("/about")}>Learn About Us</button>
+    </div>
+  );
+}
+
+export default Home;
