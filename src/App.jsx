@@ -15,7 +15,7 @@ const App = () => {
   const navigate = useNavigate();
 
   const handleContinueShopping = () => {
-    navigate("/products"); // Navigate to your product listing route
+    navigate("/products"); // make sure this route is defined in your routes
   };
 
   return (
