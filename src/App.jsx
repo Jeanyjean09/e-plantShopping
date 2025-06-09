@@ -1,5 +1,3 @@
-// src/App.jsx or src/pages/CartPage.jsx
-
 import React from "react";
 import ProductList from "./components/ProductList";
 import CartItem from "./components/CartItem";
@@ -17,7 +15,7 @@ const App = () => {
   const navigate = useNavigate();
 
   const handleContinueShopping = () => {
-    navigate("/products"); // or wherever your product list page is
+    navigate("/products"); // Navigate to your product listing route
   };
 
   return (
