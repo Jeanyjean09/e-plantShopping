@@ -2,7 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 // Import the cartReducer from your CartSlice file
-import cartReducer from './CartSlice';
+import cartReducer from '../CartSlice';
 
 // Create a Redux store using configureStore from Redux Toolkit
 const store = configureStore({
