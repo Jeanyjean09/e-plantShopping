@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import ProductList from "./components/ProductList.jsx";
-import CartPage from "./components/CartPage.jsx"; // This is the parent cart display, see below
+import CartPage from "./components/CartPage.jsx";
 import AboutUs from "./AboutUs.jsx";
 import { useSelector } from "react-redux";
 
