@@ -1,16 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import store from "./redux/store";
+import { Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import AboutUs from "./AboutUs";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<AboutUs />} />
+    </Routes>
+  );
+}
 
-root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
-);
+export default App;
