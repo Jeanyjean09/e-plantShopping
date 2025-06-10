@@ -1,14 +1,26 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Home from "./Home";
-import AboutUs from "./AboutUs";
+import { Routes, Route, Link } from "react-router-dom";
+import ProductList from "./ProductList";
+import CartItem from "./CartItem";
+import { useSelector } from "react-redux";
 
 function App() {
+  const cartItems = useSelector((state) => state.cart.items);
+  const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<AboutUs />} />
-    </Routes>
+    <div>
+      <nav>
+        <Link to="/">Products</Link> |{" "}
+        <Link to="/cart">
+          Cart <span style={{ background: "#eee", borderRadius: "50%", padding: "0 8px" }}>{totalItems}</span>
+        </Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<ProductList />} />
+        <Route path="/cart" element={<CartItem />} />
+      </Routes>
+    </div>
   );
 }
 
