@@ -1,19 +1,4 @@
-import React from "react";import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Home from "./Home";       // Your Home component
-import AboutUs from "./AboutUs"; // Your AboutUs component
-
-function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<AboutUs />} />
-    </Routes>
-  );
-}
-
-export default App;
-
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
