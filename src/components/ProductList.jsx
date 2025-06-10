@@ -1,77 +1,84 @@
-// components/ProductList.jsx
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../redux/cartSlice";
 
 const plantsArray = [
   {
-    category: "Indoor Plants",
+    category: "Air Purifying Plants",
     plants: [
       {
-        name: "Snake Plant",
-        image: "https://example.com/snakeplant.jpg",
-        description: "Easy to care for plant.",
-        cost: 15,
+        name: "Spider Plant",
+        image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308",
+        description: "Removes toxins and purifies air.",
+        cost: "$10.00",
       },
       {
-        name: "Spider Plant",
-        image: "https://example.com/spiderplant.jpg",
-        description: "Great for beginners.",
-        cost: 10,
+        name: "Snake Plant",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+        description: "Low maintenance and improves air quality.",
+        cost: "$12.00",
       },
     ],
   },
   {
-    category: "Outdoor Plants",
+    category: "Aromatic Fragrant Plants",
     plants: [
       {
-        name: "Rose",
-        image: "https://example.com/rose.jpg",
-        description: "Beautiful fragrant flowers.",
-        cost: 20,
+        name: "Lavender",
+        image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca",
+        description: "Soothing fragrance and beautiful blooms.",
+        cost: "$8.00",
       },
     ],
   },
 ];
 
-const ProductList = () => {
+function ProductList() {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector((state) => state.cart.items);
   const [addedToCart, setAddedToCart] = useState({});
 
-  const handleAddToCart = (product) => {
-    dispatch(addItem(product));
-    setAddedToCart((prevState) => ({
-      ...prevState,
-      [product.name]: true,
-    }));
+  const handleAddToCart = (plant) => {
+    dispatch(addItem({ ...plant, quantity: 1 }));
+    setAddedToCart((prev) => ({ ...prev, [plant.name]: true }));
   };
 
-  const calculateTotalQuantity = () => {
-    return cartItems ? cartItems.reduce((total, item) => total + item.quantity, 0) : 0;
-  };
+  const calculateTotalQuantity = () =>
+    cartItems ? cartItems.reduce((total, item) => total + item.quantity, 0) : 0;
 
   return (
-    <div>
-      <h2>Shopping Cart: {calculateTotalQuantity()} items</h2>
-
+    <>
+      <h2>All Plants ({calculateTotalQuantity()} in cart)</h2>
       <div className="product-grid">
         {plantsArray.map((category, index) => (
           <div key={index}>
-            <h1>{category.category}</h1>
+            <h1>
+              <div>{category.category}</div>
+            </h1>
             <div className="product-list">
               {category.plants.map((plant, plantIndex) => (
                 <div className="product-card" key={plantIndex}>
-                  <img className="product-image" src={plant.image} alt={plant.name} />
+                  <img
+                    className="product-image"
+                    src={plant.image}
+                    alt={plant.name}
+                  />
                   <div className="product-title">{plant.name}</div>
                   <div className="product-description">{plant.description}</div>
-                  <div className="product-cost">${plant.cost}</div>
+                  <div className="product-cost">{plant.cost}</div>
                   <button
                     className="product-button"
                     onClick={() => handleAddToCart(plant)}
-                    disabled={addedToCart[plant.name]} // Disable button if already added
+                    disabled={!!addedToCart[plant.name] || cartItems.find((i) => i.name === plant.name)}
+                    style={
+                      !!addedToCart[plant.name] || cartItems.find((i) => i.name === plant.name)
+                        ? { background: "#ccc", color: "#888", cursor: "not-allowed" }
+                        : {}
+                    }
                   >
-                    {addedToCart[plant.name] ? "Added" : "Add to Cart"}
+                    {addedToCart[plant.name] || cartItems.find((i) => i.name === plant.name)
+                      ? "Added to Cart"
+                      : "Add to Cart"}
                   </button>
                 </div>
               ))}
@@ -79,8 +86,8 @@ const ProductList = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
-};
+}
 
 export default ProductList;
