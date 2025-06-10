@@ -1,15 +1,16 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import store from "./redux/store";
 
-function Home() {
-  const navigate = useNavigate();
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-  return (
-    <div>
-      <h1>Welcome to Paradise Nursery</h1>
-      <button onClick={() => navigate("/about")}>Learn About Us</button>
-    </div>
-  );
-}
-
-export default Home;
+root.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
+);
