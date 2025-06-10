@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import ProductList from "./components/ProductList.jsx";
-import CartItem from "./components/CartItem.jsx";
+import CartPage from "./components/CartPage.jsx"; // This is the parent cart display, see below
 import AboutUs from "./AboutUs.jsx";
 import { useSelector } from "react-redux";
 
@@ -20,7 +20,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<ProductList />} />
-        <Route path="/cart" element={<CartItem />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/about" element={<AboutUs />} />
       </Routes>
     </div>
